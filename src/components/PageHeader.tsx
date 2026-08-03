@@ -21,6 +21,7 @@ export function PageHeader({
   trail,
   title,
   intro,
+  aside,
   children,
 }: {
   /** Mono file code shown in the margin, e.g. "BUS" or "ABOUT". */
@@ -29,6 +30,12 @@ export function PageHeader({
   trail: { label: string; href?: string }[];
   title: string;
   intro?: string;
+  /**
+   * Optional illustration set beside the title — the document plate on
+   * service pages. White paper against navy is the strongest contrast
+   * on the site, so this is where a drawn document lands hardest.
+   */
+  aside?: React.ReactNode;
   /** Optional actions or meta placed under the intro. */
   children?: React.ReactNode;
 }) {
@@ -62,15 +69,16 @@ export function PageHeader({
           </ol>
         </nav>
 
-        <div className="phead-body">
-          <p className="t-label phead-code">{code}</p>
-          <div>
-            <h1 className="t-h1">{title}</h1>
-            {intro && (
-              <p className="t-lead phead-intro">{intro}</p>
-            )}
-            {children}
+        <div className={aside ? "phead-layout has-aside" : "phead-layout"}>
+          <div className="phead-body">
+            <p className="t-label phead-code">{code}</p>
+            <div>
+              <h1 className="t-h1">{title}</h1>
+              {intro && <p className="t-lead phead-intro">{intro}</p>}
+              {children}
+            </div>
           </div>
+          {aside && <div className="phead-aside">{aside}</div>}
         </div>
       </div>
 

@@ -4,8 +4,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { EnquireBar } from "@/components/EnquireBar";
 import { categories, serviceAnchor, totalServices } from "@/lib/services";
 import { site } from "@/lib/site";
-import { IconArrow, categoryIcons } from "@/components/Icons";
-import { Crest } from "@/components/Ornament";
+import { IconArrow } from "@/components/Icons";
+import { categoryPlates } from "@/components/DocumentPlate";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -27,7 +27,7 @@ export default function ServicesPage() {
         <div className="shell">
           <div className="grid-3">
             {categories.map((c, i) => {
-              const Icon = categoryIcons[c.slug];
+              const Plate = categoryPlates[c.slug];
               return (
                 <Link
                   key={c.slug}
@@ -35,12 +35,18 @@ export default function ServicesPage() {
                   className="docket reveal"
                   style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
                 >
+                  {/* The crest came out when the plate went in. Two
+                      graphic marks on one card is one accessory too
+                      many, and the artifact identifies the family far
+                      better than a sixth variation of the medallion. */}
                   <div className="docket-head">
-                    <Crest size={52}>
-                      <Icon size={20} />
-                    </Crest>
                     <span className="t-label docket-code">{c.code}</span>
                   </div>
+                  {Plate && (
+                    <div className="card-plate" aria-hidden="true">
+                      <Plate size={208} />
+                    </div>
+                  )}
                   <h2 className="t-h3 docket-title">{c.name}</h2>
                   <p className="t-small docket-body">{c.intro}</p>
                   <p className="t-label docket-audience">For</p>

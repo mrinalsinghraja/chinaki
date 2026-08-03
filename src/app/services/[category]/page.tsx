@@ -18,6 +18,7 @@ import {
   categoryIcons,
 } from "@/components/Icons";
 import { Crest } from "@/components/Ornament";
+import { categoryPlates } from "@/components/DocumentPlate";
 
 type Params = { category: string };
 
@@ -57,6 +58,8 @@ export default async function CategoryPage({
   if (!current) notFound();
 
   const Icon = categoryIcons[current.slug];
+  /* The object a visitor walks out holding, drawn. */
+  const Plate = categoryPlates[current.slug];
 
   /* Service-level structured data — this is what a search engine
      needs to answer "who does GST registration in Nagaon". */
@@ -94,6 +97,7 @@ export default async function CategoryPage({
         ]}
         title={current.name}
         intro={current.intro}
+        aside={Plate ? <Plate size={300} className="plate" /> : undefined}
       >
         <p className="t-small phead-audience">
           <span className="t-label phead-audience-label">For</span>

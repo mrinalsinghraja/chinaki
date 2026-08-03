@@ -2855,6 +2855,56 @@ button {
     z-index: -1;
   }
 
+  /* ==========================================================
+     DOCUMENT PLATES
+     The drawn artifact each service family produces. Placed on the
+     navy masthead because white paper on navy is the strongest
+     contrast the site has.
+     ========================================================== */
+
+  .phead-layout {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .phead-aside {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .plate {
+    /* Lifted off the navy the way the slip is lifted off the desk. */
+    filter: drop-shadow(0 18px 28px rgba(4, 10, 28, 0.42))
+      drop-shadow(0 2px 4px rgba(4, 10, 28, 0.3));
+  }
+
+  @media (min-width: 60rem) {
+    .phead-layout.has-aside {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 3.5rem;
+    }
+    .phead-aside {
+      justify-content: flex-end;
+    }
+  }
+
+  /* On the hub cards the plate replaces the crest, so the six
+     families are told apart by their artifact rather than by six
+     variations of the same medallion. */
+  .card-plate {
+    display: flex;
+    justify-content: center;
+    padding-block: 0.5rem 1.25rem;
+    filter: drop-shadow(0 8px 16px rgba(58, 48, 24, 0.16));
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  a:hover > .card-plate,
+  a:hover .card-plate {
+    transform: translateY(-4px);
+  }
+
   /* The closing promise, as a certificate. The inner shell keeps the
      measure narrow so the quote does not run the full plate width. */
   .cta-plate {
