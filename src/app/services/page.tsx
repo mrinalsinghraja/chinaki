@@ -5,7 +5,7 @@ import { EnquireBar } from "@/components/EnquireBar";
 import { categories, serviceAnchor, totalServices } from "@/lib/services";
 import { site } from "@/lib/site";
 import { IconArrow } from "@/components/Icons";
-import { categoryPlates } from "@/components/DocumentPlate";
+import { ServicePhoto } from "@/components/ServicePhoto";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -26,27 +26,24 @@ export default function ServicesPage() {
       <section className="band-tight band">
         <div className="shell">
           <div className="grid-3">
-            {categories.map((c, i) => {
-              const Plate = categoryPlates[c.slug];
-              return (
-                <Link
-                  key={c.slug}
-                  href={`/services/${c.slug}`}
-                  className="docket reveal"
-                  style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
-                >
-                  {/* The crest came out when the plate went in. Two
-                      graphic marks on one card is one accessory too
-                      many, and the artifact identifies the family far
-                      better than a sixth variation of the medallion. */}
+            {categories.map((c, i) => (
+              <Link
+                key={c.slug}
+                href={`/services/${c.slug}`}
+                className="docket docket-photo reveal"
+                style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
+              >
+                {/* The photograph leads. Someone recognises a counter
+                    and a person before they read a word, and the two
+                    families at the top of the grid are the ones most
+                    people arrive looking for. */}
+                <div className="card-photo">
+                  <ServicePhoto slug={c.slug} priority={i < 2} />
+                </div>
+                <div className="docket-body-wrap">
                   <div className="docket-head">
                     <span className="t-label docket-code">{c.code}</span>
                   </div>
-                  {Plate && (
-                    <div className="card-plate" aria-hidden="true">
-                      <Plate size={208} />
-                    </div>
-                  )}
                   <h2 className="t-h3 docket-title">{c.name}</h2>
                   <p className="t-small docket-body">{c.intro}</p>
                   <p className="t-label docket-audience">For</p>
@@ -55,9 +52,9 @@ export default function ServicesPage() {
                     {c.services.length} services
                     <IconArrow size={15} />
                   </span>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

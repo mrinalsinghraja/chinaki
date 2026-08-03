@@ -3,19 +3,14 @@ import type { Metadata } from "next";
 import { AcknowledgementSlip, stages } from "@/components/AcknowledgementSlip";
 import { categories, totalServices } from "@/lib/services";
 import { site, whatsappUrl } from "@/lib/site";
+import { IconArrow, IconCheck, IconWhatsApp } from "@/components/Icons";
 import {
-  IconArrow,
-  IconCheck,
-  IconWhatsApp,
-  categoryIcons,
-} from "@/components/Icons";
-import {
-  Crest,
   Filigree,
   GhostMark,
   GuillocheBand,
   Rosette,
 } from "@/components/Ornament";
+import { ServicePhoto } from "@/components/ServicePhoto";
 
 export const metadata: Metadata = {
   title: `${site.name} — ${site.tagline}`,
@@ -185,19 +180,18 @@ export default function HomePage() {
           </header>
 
           <div className="grid-3">
-            {categories.map((c, i) => {
-              const Icon = categoryIcons[c.slug];
-              return (
-                <Link
-                  key={c.slug}
-                  href={`/services/${c.slug}`}
-                  className="docket reveal"
-                  style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
-                >
+            {categories.map((c, i) => (
+              <Link
+                key={c.slug}
+                href={`/services/${c.slug}`}
+                className="docket docket-photo reveal"
+                style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
+              >
+                <div className="card-photo">
+                  <ServicePhoto slug={c.slug} />
+                </div>
+                <div className="docket-body-wrap">
                   <div className="docket-head">
-                    <Crest size={52}>
-                      <Icon size={20} />
-                    </Crest>
                     <span className="t-label docket-code">{c.code}</span>
                   </div>
                   <h3 className="t-h3 docket-title">{c.name}</h3>
@@ -218,9 +212,9 @@ export default function HomePage() {
                     {c.services.length} services
                     <IconArrow size={15} />
                   </span>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -2905,6 +2905,99 @@ button {
     transform: translateY(-4px);
   }
 
+  /* ==========================================================
+     SERVICE PHOTOGRAPHY
+
+     The plates show what you walk out holding. The photographs
+     show who hands it to you. On a card the photograph leads,
+     because a counter and a face are recognised before any word
+     on the page is read.
+     ========================================================== */
+
+  /* .docket sets its own padding, which a full-bleed photograph has
+     to escape. Rather than fight it with negative margins that break
+     the moment the padding changes, a photo card drops the padding
+     and hands it to an inner wrapper. */
+  .docket-photo {
+    padding: 0;
+  }
+
+  .docket-body-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem 1.75rem 1.75rem;
+  }
+
+  .card-photo {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-sunk);
+    aspect-ratio: 16 / 9;
+  }
+
+  .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s var(--ease-out);
+  }
+
+  /* The warm gold wash ties a photographed office to a palette it was
+     never shot in, and takes the edge off the AI sheen. */
+  .card-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(22, 41, 92, 0.08),
+      rgba(122, 92, 38, 0.12)
+    );
+    pointer-events: none;
+  }
+
+  a:hover .card-photo img {
+    transform: scale(1.045);
+  }
+
+  /* On the navy masthead the photograph is the lit thing in a dark
+     room, so it gets the lift the acknowledgement slip gets. */
+  .phead-photo {
+    position: relative;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow:
+      0 26px 48px rgba(4, 10, 28, 0.46),
+      0 3px 8px rgba(4, 10, 28, 0.32);
+  }
+
+  .phead-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .phead-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* A hairline of gold around the frame, the same edge the plates
+       and the guilloche use. Inset rather than a border so it does
+       not add to the box. */
+    box-shadow: inset 0 0 0 1px rgba(200, 155, 74, 0.45);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a:hover .card-photo img {
+      transform: none;
+    }
+  }
+
   /* The closing promise, as a certificate. The inner shell keeps the
      measure narrow so the quote does not run the full plate width. */
   .cta-plate {

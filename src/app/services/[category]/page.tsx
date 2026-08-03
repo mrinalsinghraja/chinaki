@@ -15,10 +15,9 @@ import {
   IconPin,
   IconPlus,
   IconWhatsApp,
-  categoryIcons,
 } from "@/components/Icons";
-import { Crest } from "@/components/Ornament";
 import { categoryPlates } from "@/components/DocumentPlate";
+import { ServicePhoto } from "@/components/ServicePhoto";
 
 type Params = { category: string };
 
@@ -57,8 +56,9 @@ export default async function CategoryPage({
   const current = getCategory(category);
   if (!current) notFound();
 
-  const Icon = categoryIcons[current.slug];
-  /* The object a visitor walks out holding, drawn. */
+  /* Two registers, two jobs. The photograph opens the page — who
+     will sit with you, and what the counter looks like. The drawn
+     plate stays in the sidebar as the object you leave holding. */
   const Plate = categoryPlates[current.slug];
 
   /* Service-level structured data — this is what a search engine
@@ -97,7 +97,11 @@ export default async function CategoryPage({
         ]}
         title={current.name}
         intro={current.intro}
-        aside={Plate ? <Plate size={300} className="plate" /> : undefined}
+        aside={
+          <div className="phead-photo">
+            <ServicePhoto slug={current.slug} variant="feature" priority />
+          </div>
+        }
       >
         <p className="t-small phead-audience">
           <span className="t-label phead-audience-label">For</span>
@@ -176,9 +180,11 @@ export default async function CategoryPage({
           {/* ---- Contextual sidebar ---- */}
           <aside className="cat-aside" aria-label="Visit Chinaki">
             <div className="well cat-card">
-              <Crest size={52}>
-                <Icon size={20} />
-              </Crest>
+              {Plate && (
+                <div className="card-plate" aria-hidden="true">
+                  <Plate size={172} />
+                </div>
+              )}
               <p className="t-label cat-card-code">{current.code}</p>
               <p className="t-h4 cat-card-title">
                 {current.services.length} services in this family
