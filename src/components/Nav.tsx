@@ -92,10 +92,18 @@ export function Nav() {
       >
         <div className="nav-bar shell">
           <Link href="/" aria-label="Chinaki — home" className="nav-logo">
-            {/* Unscrolled the bar sits over the navy masthead, so the mark
-                is struck in gold; once the glass comes in it goes back to
-                the full-colour brand lockup. */}
-            <Logo size={34} tone={set ? "brand" : "gold"} showTagline />
+            {/* Both restrikes are rendered and cross-faded rather than
+                swapping one src. The lockup is a raster now, and
+                switching the source on scroll would blank the mark for
+                a frame while the browser fetched the other file. */}
+            <span className="nav-logo-swap" data-on={set ? "brand" : "gold"}>
+              <span className="nav-logo-face" data-face="gold">
+                <Logo size={40} tone="gold" showTagline priority />
+              </span>
+              <span className="nav-logo-face" data-face="brand">
+                <Logo size={40} tone="brand" showTagline priority />
+              </span>
+            </span>
           </Link>
 
           <nav className="nav-links" aria-label="Main">

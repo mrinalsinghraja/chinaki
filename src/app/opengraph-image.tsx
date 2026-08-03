@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
@@ -6,14 +8,28 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * The share card is the masthead: navy plate, the mark struck in gold,
- * the wordmark letterspaced. Built with the OG runtime so there is no
- * image asset to re-cut when the brand changes.
+ * The share card is the masthead: navy plate, the client's own mark
+ * and wordmark restruck in cream, the promise underneath.
+ *
+ * The brand rasters are inlined as data URIs. Satori has no network and
+ * no public-folder resolution, so an <img src="/brand/..."> silently
+ * renders nothing — the file has to be read off disk at build time and
+ * base64'd in.
  *
  * Satori gotcha: a div with more than one child needs an explicit
  * display. Template literals keep interpolated text a single string.
  */
+async function inline(file: string) {
+  const buf = await readFile(join(process.cwd(), "public", "brand", file));
+  return `data:image/png;base64,${buf.toString("base64")}`;
+}
+
 export default async function Image() {
+  const [mark, wordmark] = await Promise.all([
+    inline("mark-light.png"),
+    inline("wordmark-light.png"),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -29,25 +45,13 @@ export default async function Image() {
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <svg width="78" height="78" viewBox="12 14 96 92" fill="none">
-            <path
-              d="M 76.06 25.56 A 38 38 0 1 0 80.13 91.99"
-              stroke="#F2E6CB"
-              strokeWidth="13"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 26.62 73.49 L 23.80 79.25 A 41 41 0 0 0 96.20 79.25 L 88.19 70.26 A 30 30 0 0 1 33.51 74.08 Z"
-              fill="#D9AC58"
-            />
-            <circle cx="91" cy="29" r="9.5" fill="#D9AC58" />
-            <rect x="82.5" y="46" width="11" height="30" rx="2" fill="#D9AC58" />
-          </svg>
-          <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-            <div style={{ fontSize: 40, letterSpacing: 9, color: "#F4F1E7" }}>
-              CHINAKI
-            </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
+          {/* Explicit width AND height on both, derived from the
+              intrinsic sizes — Satori will happily stretch an image
+              given only one. */}
+          <img src={mark} width={80} height={91} alt="" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <img src={wordmark} width={331} height={46} alt="" />
             <div style={{ fontSize: 19, letterSpacing: 5, color: "#E0BC72" }}>
               {`${site.locality.toUpperCase()} · ${site.region.toUpperCase()}`}
             </div>

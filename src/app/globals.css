@@ -883,6 +883,36 @@ button {
     flex: none;
   }
 
+  /* Two restrikes of the lockup stacked in the same box. The navy one
+     is the in-flow copy so the bar still reserves the right width; the
+     gold one is laid over it and the pair cross-fade on scroll. */
+  .nav-logo-swap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .nav-logo-face[data-face="gold"] {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo-face {
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .nav-logo-swap[data-on="brand"] .nav-logo-face[data-face="gold"],
+  .nav-logo-swap[data-on="gold"] .nav-logo-face[data-face="brand"] {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-logo-face {
+      transition: none;
+    }
+  }
+
   .nav-links {
     display: none;
   }
@@ -2499,20 +2529,22 @@ button {
   .lockup-text {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     min-width: 0;
+    /* LOAD-BEARING. A column flexbox stretches its children on the
+       cross axis by default, which would set the wordmark image's
+       width to the container's and squash the client's letterforms.
+       The whole brief was "don't distort" — this line is that. */
+    align-items: flex-start;
   }
 
-  .lockup-name {
-    font-family: var(--font-display);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: 0.17em;
-    text-transform: uppercase;
-    /* Trailing tracking hangs off the last letter; pull it back so the
-       word optically centres against the mark. */
-    margin-right: -0.17em;
-    transition: color 0.5s var(--ease-out);
+  /* Belt and braces: every brand raster keeps its own ratio no matter
+     what container it lands in. */
+  .lockup img,
+  .foot-brand img,
+  .plate-seal img {
+    max-width: 100%;
+    object-fit: contain;
   }
 
   /* Below ~30rem the tagline and the menu button fight for the bar.
@@ -2780,7 +2812,17 @@ button {
   }
 
   .foot-brand {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  /* The mark struck above the promise — a certificate carries the seal
+     of whoever stands behind it. Nothing else decorates it: the plate
+     already has four filigree corners and a double rule, and a fifth
+     flourish would be the accessory to take off before leaving. */
+  .plate-seal {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.75rem;
   }
 
   /* ==========================================================

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./Logo";
+import { Lockup } from "./Logo";
 import { GhostMark } from "./Ornament";
 import { categories } from "@/lib/services";
 import { site, whatsappUrl } from "@/lib/site";
@@ -24,8 +24,12 @@ export function Footer() {
       <div className="shell">
         <div className="foot-grid">
           <div>
+            {/* The footer is where a brand signs off, so it gets the
+                client's stacked lockup whole — monogram, wordmark,
+                rule and tagline — rather than the horizontal
+                arrangement the header has to compose. */}
             <div className="foot-brand">
-              <Logo size={44} tone="gold" showTagline />
+              <Lockup width={208} tone="gold" />
             </div>
             <p className="t-small" style={{ maxWidth: "24rem" }}>
               A digital service centre in {site.locality}, {site.region},

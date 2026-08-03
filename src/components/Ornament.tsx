@@ -14,7 +14,12 @@
  *
  * All maths is deterministic — no Math.random anywhere — so these render
  * identically on the server and the client and never trip hydration.
+ *
+ * The one exception is GhostMark, which is the client's actual logo and
+ * therefore has to be their file, not our curves.
  */
+
+import Image from "next/image";
 
 const TAU = Math.PI * 2;
 
@@ -207,8 +212,14 @@ export function GuillocheBand({
 
 /**
  * The brand at architectural scale: the monogram blown up and bled off
- * the edge of a band at watermark opacity. This is what carries "big
- * brand presence" without a logo being pasted six times at nav size.
+ * the edge of a band at watermark opacity. This is what carries big
+ * brand presence without the logo being pasted six times at nav size,
+ * and at 620px it is the largest piece of brand on any page — which is
+ * exactly why it had to stop being an approximation of the mark.
+ *
+ * It uses a flat single-colour silhouette rather than the two-colour
+ * artwork: at 5% opacity a navy-and-gold mark loses half its shape
+ * against a ground that matches either colour.
  */
 export function GhostMark({
   size = 560,
@@ -216,37 +227,25 @@ export function GhostMark({
   className,
   style,
 }: {
+  /** Width. Height follows the mark's own 512:585 proportion. */
   size?: number;
   tone?: "navy" | "gold" | "paper";
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const ink =
-    tone === "gold" ? "#C89B4A" : tone === "paper" ? "#FFFFFF" : "#16295C";
   return (
-    <svg
-      viewBox="12 14 96 92"
-      width={size}
-      height={size}
-      fill="none"
+    <Image
+      src={tone === "paper" ? "/brand/ghost-paper.png" : "/brand/ghost-navy.png"}
+      alt=""
       aria-hidden="true"
+      width={512}
+      height={585}
       className={className}
-      style={style}
-    >
-      <path
-        d="M 76.06 25.56 A 38 38 0 1 0 80.13 91.99"
-        stroke={ink}
-        strokeWidth="13"
-        strokeLinecap="round"
-      />
-      <path
-        d="M 26.62 73.49 L 23.80 79.25 A 41 41 0 0 0 96.20 79.25
-           L 88.19 70.26 A 30 30 0 0 1 33.51 74.08 Z"
-        fill={ink}
-      />
-      <circle cx="91" cy="29" r="9.5" fill={ink} />
-      <rect x="82.5" y="46" width="11" height="30" rx="2" fill={ink} />
-    </svg>
+      style={{ ...style, width: size, height: "auto" }}
+      sizes={`${size}px`}
+      /* Gold was a third tone nobody used once the silhouettes went
+         in; navy and paper cover every ground on the site. */
+    />
   );
 }
 

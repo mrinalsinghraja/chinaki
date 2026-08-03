@@ -11,6 +11,7 @@ import {
   Rosette,
 } from "@/components/Ornament";
 import { ServicePhoto } from "@/components/ServicePhoto";
+import { Mark } from "@/components/Logo";
 
 export const metadata: Metadata = {
   title: `${site.name} — ${site.tagline}`,
@@ -303,6 +304,12 @@ export default function HomePage() {
               style={{ top: "-22%", right: "-6rem", zIndex: -1 }}
             />
             <div className="shell-narrow cta-block">
+          {/* The one place the promise is made is the one place the
+              mark is struck at scale — a certificate carries the seal
+              of whoever is standing behind it. */}
+          <div className="plate-seal">
+            <Mark size={84} tone="gold" />
+          </div>
           <p className="eyebrow t-label" style={{ justifyContent: "center" }}>
             Our promise
           </p>
