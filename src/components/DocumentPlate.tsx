@@ -555,6 +555,79 @@ export function PlateDocumentation(p: PlateProps) {
   );
 }
 
+/* LIC — the contractor's licence. What makes this one identifiable is
+   not the paper but the CLASS: the whole of Assam contractor
+   registration turns on I(A) through III, so the class band is drawn
+   as a real row of boxes with the held class filled in gold. A hard
+   hat sits behind the sheet to say which trade it belongs to — every
+   other plate in this set already resolves to a sheet of paper. */
+export function PlateLicence(p: PlateProps) {
+  return (
+    <Plate
+      {...p}
+      label="A contractor's licence showing its class band, with a safety helmet behind it"
+    >
+      {/* the helmet, tucked behind the sheet */}
+      <g>
+        <path
+          d="M22 108a36 36 0 0 1 72 0Z"
+          fill={BACK}
+          stroke={INK}
+          strokeWidth={1.3}
+          strokeLinejoin="round"
+        />
+        <path
+          d="M45 108V74a13 13 0 0 1 26 0v34"
+          fill="none"
+          stroke={INK}
+          strokeWidth={1.3}
+        />
+        <path
+          d="M16 108h84"
+          stroke={INK}
+          strokeWidth={1.6}
+          strokeLinecap="round"
+        />
+      </g>
+
+      {/* the licence itself */}
+      <rect
+        x={62}
+        y={16}
+        width={124}
+        height={152}
+        rx={2}
+        fill={SHEET}
+        stroke={INK}
+        strokeWidth={1.2}
+      />
+      <rect x={62} y={16} width={124} height={15} fill={INK} opacity={0.9} />
+      <Rules x={74} y={46} widths={[62, 84, 50]} gap={9} />
+
+      {/* the class band — the one number a contractor is looking for */}
+      <Rules x={74} y={80} widths={[28]} gap={9} width={2.6} stroke={RULE} />
+      {[0, 1, 2, 3, 4].map((i) => (
+        <rect
+          key={i}
+          x={74 + i * 21}
+          y={88}
+          width={17}
+          height={14}
+          rx={1.5}
+          fill={i === 0 ? GOLD : SHEET}
+          opacity={i === 0 ? 0.9 : 1}
+          stroke={i === 0 ? GOLD_DEEP : RULE}
+          strokeWidth={1.1}
+        />
+      ))}
+
+      <Rules x={74} y={118} widths={[98, 76, 98]} gap={9} />
+      <Signature x={76} y={154} s={0.9} />
+      <Seal cx={160} cy={148} r={11} />
+    </Plate>
+  );
+}
+
 /** Keyed by category slug, so a page looks one up the same way it looks
     up its icon. */
 export const categoryPlates: Record<
@@ -562,6 +635,7 @@ export const categoryPlates: Record<
   (p: PlateProps) => React.JSX.Element
 > = {
   "business-services": PlateBusiness,
+  "licence-services": PlateLicence,
   "tax-services": PlateTax,
   "government-services": PlateGovernment,
   "employee-services": PlateEmployee,

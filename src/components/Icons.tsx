@@ -106,6 +106,17 @@ export const IconCheck = (p: IconProps) => (
   </Svg>
 );
 
+/* Licensing. A hard hat rather than a certificate — every other family
+   in this set already resolves to a sheet of paper, and the thing that
+   tells a contractor this row is theirs is the helmet. */
+export const IconLicence = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3.5 16.5a8.5 8.5 0 0 1 17 0Z" />
+    <path d="M9 16V8.2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V16" />
+    <path d="M2.5 16.5h19" />
+  </Svg>
+);
+
 export const IconWhatsApp = ({ size = 20, className }: IconProps) => (
   <svg
     width={size}
@@ -184,6 +195,7 @@ export const categoryIcons: Record<
   (p: IconProps) => React.JSX.Element
 > = {
   "business-services": IconBusiness,
+  "licence-services": IconLicence,
   "tax-services": IconTax,
   "government-services": IconGovernment,
   "employee-services": IconEmployee,

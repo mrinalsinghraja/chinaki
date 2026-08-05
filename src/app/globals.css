@@ -1625,6 +1625,19 @@ button {
     .grid-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+
+    /* Seven families do not divide by three. A last card that is also
+       the first of its row is stranded on the left, which reads as a
+       missing eighth card rather than a complete set — so it moves to
+       the centre column. Same width as every other card, because
+       stretching it across two columns would give one family a photo
+       twice the size of its siblings and imply it matters more.
+
+       Scoped to the three-column breakpoint: at two columns the maths
+       lands differently and the rule must not fire. */
+    .grid-3 > :last-child:nth-child(3n + 1) {
+      grid-column: 2;
+    }
   }
 
   /* ==========================================================

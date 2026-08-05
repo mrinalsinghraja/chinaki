@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { EnquireBar } from "@/components/EnquireBar";
 import { site } from "@/lib/site";
-import { totalServices } from "@/lib/services";
+import { totalCategoriesWord, totalServices } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -66,7 +66,7 @@ export default function AboutPage() {
             </p>
             <p className="t-label story-aside-label">Scope</p>
             <p className="t-small">
-              {totalServices} services across six families
+              {totalServices} services across {totalCategoriesWord} families
             </p>
           </div>
 

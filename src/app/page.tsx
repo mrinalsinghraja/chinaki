@@ -1,7 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AcknowledgementSlip, stages } from "@/components/AcknowledgementSlip";
-import { categories, totalServices } from "@/lib/services";
+import {
+  categories,
+  totalCategories,
+  totalCategoriesWord,
+  totalServices,
+} from "@/lib/services";
 import { site, whatsappUrl } from "@/lib/site";
 import { IconArrow, IconCheck, IconWhatsApp } from "@/components/Icons";
 import {
@@ -101,7 +106,9 @@ export default function HomePage() {
             <dl className="hero-facts">
               <div>
                 <dt className="t-label">Services</dt>
-                <dd className="t-ref">{totalServices} across 6 departments</dd>
+                <dd className="t-ref">
+                  {`${totalServices} across ${totalCategories} departments`}
+                </dd>
               </div>
               <div>
                 <dt className="t-label">Open</dt>
@@ -173,7 +180,9 @@ export default function HomePage() {
         <div className="shell">
           <header className="band-head reveal">
             <p className="eyebrow t-label">What we handle</p>
-            <h2 className="t-h2">Six families of work, one counter.</h2>
+            <h2 className="t-h2 cap-first">
+              {`${totalCategoriesWord} families of work, one counter.`}
+            </h2>
             <p className="t-lead band-head-lead">
               Pick the family that matches your need. Each one lists the exact
               documents to bring and how long it usually takes.

@@ -2,7 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { EnquireBar } from "@/components/EnquireBar";
-import { categories, serviceAnchor, totalServices } from "@/lib/services";
+import {
+  categories,
+  serviceAnchor,
+  totalCategoriesWord,
+  totalServices,
+} from "@/lib/services";
 import { site } from "@/lib/site";
 import { IconArrow } from "@/components/Icons";
 import { ServicePhoto } from "@/components/ServicePhoto";
@@ -20,7 +25,7 @@ export default function ServicesPage() {
         code="SRV"
         trail={[{ label: "Services" }]}
         title="Everything we handle, grouped so you can find it."
-        intro={`${totalServices} services across six families. Open the one that matches your need — each page lists the documents to bring and the timeline you can expect.`}
+        intro={`${totalServices} services across ${totalCategoriesWord} families. Open the one that matches your need — each page lists the documents to bring and the timeline you can expect.`}
       />
 
       <section className="band-tight band">

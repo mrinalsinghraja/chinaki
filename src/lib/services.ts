@@ -102,11 +102,123 @@ export const categories: Category[] = [
         turnaround: "1–3 working days after video verification",
       },
       {
+        name: "GeM Registration",
+        summary:
+          "Register as a seller on the Government e-Marketplace so government departments can buy from you directly. We complete the seller profile, the organisation and bank verification, and add your first product or service listings.",
+        documents: [
+          "PAN of the business or proprietor",
+          "Aadhaar linked to a mobile number",
+          "GST certificate",
+          "Udyam or MSME certificate, if you have one",
+          "Business bank account details or cancelled cheque",
+          "Income tax return of the last assessment year",
+        ],
+        turnaround: "1–3 working days, subject to portal verification",
+      },
+      {
         name: "Business Documentation",
         summary:
           "Drafting, formatting and assembling the supporting paperwork a registration or tender needs — declarations, NOCs, affidavit formats and document sets.",
         documents: ["Depends on the document — bring what you have"],
         turnaround: "Same day for most documents",
+      },
+    ],
+  },
+  {
+    /* Split out of Business Services once the factory and contractor
+       work arrived. These are Labour Department and PWD licensing —
+       a different counter and a different customer from a shop owner
+       registering a firm, and a contractor searching for a renewal
+       should land on a page about renewals, not on item eleven of a
+       list of fourteen. */
+    slug: "licence-services",
+    code: "LIC",
+    name: "Licence Services",
+    short: "Factory, labour and contractor licensing",
+    intro:
+      "The licences that let work actually start — factory, labour and contractor. These run on department calendars and inspection dates, so the useful thing we do is keep the file complete and tell you where it is sitting.",
+    audience:
+      "Factory owners, civil contractors and firms employing contract labour",
+    services: [
+      {
+        name: "Factory Licence",
+        summary:
+          "The licence under the Factories Act that lets a manufacturing unit operate. We prepare the application with your plant details, worker numbers and power load, and follow it through plan approval and inspection.",
+        documents: [
+          "Proof of ownership or lease of the premises",
+          "Approved factory building plan",
+          "List of directors, partners or the occupier",
+          "Details of machinery and connected power load",
+          "Number of workers to be employed",
+          "Trade licence and municipal NOC",
+        ],
+        turnaround:
+          "Usually several weeks — plan approval and inspection are department-scheduled",
+      },
+      {
+        name: "Amendment of Factory Licence",
+        summary:
+          "Change what is recorded on an existing factory licence — the occupier or manager, the worker count, added machinery or increased power load.",
+        documents: [
+          "Existing factory licence",
+          "Proof supporting the change being made",
+          "Revised plan or machinery list, where the change needs one",
+        ],
+        turnaround: "Usually 2–4 weeks, subject to department queries",
+      },
+      {
+        name: "Transfer of Factory Licence",
+        summary:
+          "Move an existing factory licence to a new occupier when the unit changes hands, so production does not have to stop while a fresh licence is applied for.",
+        documents: [
+          "Existing factory licence",
+          "Sale deed, transfer deed or lease in the new occupier's name",
+          "NOC from the outgoing occupier",
+          "Identity and address proof of the incoming occupier",
+        ],
+        turnaround: "Usually 2–4 weeks, subject to department queries",
+      },
+      {
+        name: "Labour Licence of a Contractor",
+        summary:
+          "The licence a contractor needs under the Contract Labour Act before deploying workers on a principal employer's site. We prepare the application, the Form V from the principal employer, and the fee challans.",
+        documents: [
+          "Form V certificate from the principal employer",
+          "Work order or contract agreement",
+          "Number of contract workers to be engaged",
+          "PAN and registration papers of the contracting firm",
+          "Fee and security deposit challans",
+        ],
+        turnaround: "Usually 2–3 weeks after the Form V is in hand",
+      },
+      {
+        name: "Contractor Registration and Renewal",
+        summary:
+          "Registration and renewal of a contractor's licence with Assam government departments — Class I(A), I(B), I(C), Class II and Class III. We assemble the class-specific file and track it to issue.",
+        documents: [
+          "PAN and GST registration",
+          "Solvency certificate from a bank",
+          "Experience and completed-work certificates",
+          "Machinery and equipment list",
+          "Technical staff details and qualifications",
+          "Previous licence, if renewing",
+        ],
+        turnaround:
+          "Varies by class and department — we confirm the timeline before you pay",
+      },
+      {
+        name: "Upgradation of Contractors",
+        summary:
+          "Move up a contractor class — Class III to Class II, Class II to Class I and so on — once your completed work, turnover and equipment meet the higher bracket. We check you actually qualify before filing.",
+        documents: [
+          "Existing contractor registration certificate",
+          "Completed-work certificates for the qualifying value",
+          "Turnover proof and audited accounts",
+          "Solvency certificate at the higher limit",
+          "Machinery and technical staff details",
+        ],
+        turnaround:
+          "Varies by department — assessment is committee-scheduled",
       },
     ],
   },
@@ -412,3 +524,31 @@ export const totalServices = categories.reduce(
   (n, c) => n + c.services.length,
   0,
 );
+
+/**
+ * The family count, spelled out for sentence copy.
+ *
+ * Three pages said "six families" as literal text, so adding a seventh
+ * left the site contradicting itself in three places at once. Derived
+ * from the array now, which is the only way a count in prose stays
+ * true. Numerals are right for data — "32 services" — and wrong in the
+ * middle of a sentence, hence the word.
+ */
+const NUMBER_WORDS = [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+];
+
+export const totalCategories = categories.length;
+
+export const totalCategoriesWord =
+  NUMBER_WORDS[totalCategories] ?? String(totalCategories);

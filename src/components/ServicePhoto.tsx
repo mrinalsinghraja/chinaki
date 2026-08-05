@@ -42,6 +42,10 @@ export const servicePhotos: Record<string, ServicePhoto> = {
     src: "/images/services/business-services.jpg",
     alt: "A shop owner smiling as a Chinaki assistant hands him his completed business registration file across the counter.",
   },
+  "licence-services": {
+    src: "/images/services/licence-services.jpg",
+    alt: "A building contractor collecting his licence file at the Chinaki counter, safety helmet and rolled site drawings beside him.",
+  },
   "tax-services": {
     src: "/images/services/tax-services.jpg",
     alt: "A Chinaki assistant at a laptop working through a customer's return with him at the counter, his papers spread in front of him.",
