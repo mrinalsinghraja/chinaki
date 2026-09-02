@@ -978,13 +978,17 @@ button {
     color: var(--color-muga);
   }
 
+  /* Paper, not glass. The bar above can be translucent because it is a
+     thin strip, but this panel is 450px of dense text laid over the home
+     hero — and the hero is deep navy with a very large white headline,
+     which read straight through the nav's 0.76 glass. Two layers of type
+     on top of each other. An opaque ground is the fix; a backdrop filter
+     behind an opaque surface does nothing, so it goes with it. */
   .mega {
     display: none;
     position: absolute;
     inset: 100% 0 auto 0;
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    backdrop-filter: blur(24px) saturate(180%);
+    background: var(--color-ground);
     border-bottom: 1px solid var(--color-line);
     box-shadow: var(--e3);
     opacity: 0;
