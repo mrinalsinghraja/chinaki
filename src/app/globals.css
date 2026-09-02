@@ -1173,6 +1173,19 @@ button {
     .mega {
       display: block;
     }
+
+    /* With the panel open the bar is no longer a thin strip over the
+       page — it is the top edge of one 750px surface. Left as glass it
+       tints steel blue against the navy hero and meets the panel's
+       cream on a hard seam, so it takes the panel's ground and drops
+       both the blur and the rule that would draw a line across the
+       middle of a single object. */
+    .nav.is-set[data-open="true"] {
+      background: var(--color-ground);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-bottom-color: transparent;
+    }
   }
 
   /* ==========================================================
@@ -2783,6 +2796,12 @@ button {
 
   .nav.is-set {
     box-shadow: var(--e1);
+  }
+
+  /* The panel casts its own shadow from its bottom edge. The bar's would
+     land in the middle of that same surface and read as a crease. */
+  .nav.is-set[data-open="true"] {
+    box-shadow: none;
   }
 
   /* ==========================================================
