@@ -1,10 +1,12 @@
 # Chinaki
 
 Website for **Chinaki**, a digital service centre in Nagaon, Assam.
-**Target: https://chinaki.co.in**
+**Live at [www.chinaki.co.in](https://www.chinaki.co.in)**
 
-Hosted under `chinaki.services@gmail.com` (GitHub `chinakiservices`,
-Vercel `chinakiservices-2368`) — deliberately separate from MSRX.
+![Chinaki — digital services made simple, Nagaon, Assam](docs/screenshot.png)
+
+Owned and operated by the business. Hosting and deployment run from the
+owner's own accounts, deliberately separate from MSRX.
 
 Next.js 15 (App Router) · React 19 · Tailwind v4 · TypeScript · fully static.
 
