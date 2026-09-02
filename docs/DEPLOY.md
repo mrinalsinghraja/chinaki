@@ -4,14 +4,11 @@ Target: **https://chinaki.co.in** (apex canonical, `www` redirects to it).
 The site is fully static — every route prerenders. No database, no
 environment variables, no API keys.
 
-Accounts — this project is deliberately **separate from MSRX**. Everything
-lives under `chinaki.services@gmail.com`:
-
-| Service | Account |
-| --- | --- |
-| GitHub | `chinakiservices` |
-| Vercel | `chinakiservices-2368` |
-| Domain | GoDaddy, `chinaki.co.in` |
+Accounts — this project is deliberately **separate from MSRX**. GitHub,
+Vercel and the domain registrar all sit under the business owner's own
+accounts. The specific account names are not recorded here: this repository
+is public, and account topology is a thing to hand over in person rather
+than publish. Check which one you are signed in as before deploying.
 
 ---
 
