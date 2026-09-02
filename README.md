@@ -3,6 +3,10 @@
 Website for **Chinaki**, a digital service centre in Nagaon, Assam.
 **Live at [www.chinaki.co.in](https://www.chinaki.co.in)**
 
+![Opening "What to bring" on a service, which lists the documents to carry to the counter](docs/demo.gif)
+
+*Every service says how long it usually takes and what to bring, so someone can tell whether they need it before travelling.*
+
 ![Chinaki — digital services made simple, Nagaon, Assam](docs/screenshot.png)
 
 Owned and operated by the business. Hosting and deployment run from the
